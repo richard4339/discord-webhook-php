@@ -1,6 +1,8 @@
 <?php
 
 namespace Discord;
+use Discord\Exceptions\NoContentException;
+use Discord\Exceptions\NoURLException;
 
 /**
  * Class Discord
@@ -15,6 +17,15 @@ class Discord
      */
     public static function send($content, $url)
     {
+
+        if(empty($content)) {
+            throw new NoContentException('No content provided');
+        }
+
+        if(empty($url)) {
+            throw new NoURLException('No URL provided');
+        }
+
         $data = array("content" => $content);
         $data_string = json_encode($data);
 

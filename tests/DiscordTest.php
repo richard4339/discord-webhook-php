@@ -5,12 +5,21 @@ use Discord\Discord;
 class DiscordTest extends PHPUnit_Framework_TestCase
 {
 
-    public function testSend()
+    public function testNoContentSend()
     {
 
-        $send = Discord::send("Test", "");
+        $this->expectException(\Discord\Exceptions\NoContentException::class);
 
-        $this->assertNotEmpty($send);
+        Discord::send("", "");
+
+    }
+
+    public function testNoURLSend()
+    {
+
+        $this->expectException(\Discord\Exceptions\NoURLException::class);
+
+        Discord::send("Test", "");
 
     }
 
